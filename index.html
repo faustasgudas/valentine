@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentino pasiūlymas 💘</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #ffe6f0 0%, #ffd1e3 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(230, 0, 115, 0.2);
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      color: #e60073;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    p {
+      font-size: 1.3em;
+      color: #333;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    button {
+      font-size: 18px;
+      padding: 15px 35px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    #yes {
+      background: linear-gradient(135deg, #ff4d88 0%, #e60073 100%);
+      color: white;
+      box-shadow: 0 5px 15px rgba(230, 0, 115, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+    #yes:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(230, 0, 115, 0.4);
+    }
+    #no {
+      background-color: #e0e0e0;
+      color: #666;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    #no.floating {
+      position: fixed;
+    }
+    #no:hover {
+      background-color: #d0d0d0;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    /* Success page styles */
+    .success-page {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in;
+    }
+    .success-page.active {
+      display: block;
+    }
+    .success-page h1 {
+      font-size: 3em;
+      color: #e60073;
+      margin-bottom: 30px;
+      animation: bounceIn 0.8s ease-out;
+    }
+    .success-page .gif-container {
+      margin: 30px 0;
+      animation: scaleIn 0.6s ease-out 0.3s both;
+    }
+    .success-page img {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(230, 0, 115, 0.3);
+    }
+    .success-page p {
+      font-size: 1.5em;
+      color: #333;
+      margin-top: 30px;
+      animation: slideUp 0.6s ease-out 0.5s both;
+    }
+    .hearts-bg {
+      position: fixed;
+      top: -50px;
+      font-size: 40px;
+      animation: fall 8s linear infinite;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fall {
+      0% { 
+        top: -50px;
+        opacity: 0.7;
+      }
+      100% { 
+        top: 110vh;
+        transform: translateX(100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+      .card {
+        padding: 35px 25px;
+      }
+      h1 { 
+        font-size: 1.8em; 
+        margin-bottom: 15px;
+      }
+      p { 
+        font-size: 1.1em;
+        margin-bottom: 25px;
+      }
+      button { 
+        font-size: 16px; 
+        padding: 12px 28px;
+      }
+      .buttons {
+        gap: 12px;
+      }
+      .success-page h1 {
+        font-size: 2em;
+      }
+      .success-page p {
+        font-size: 1.2em;
+      }
+      .success-page img {
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 400px) {
+      h1 { font-size: 1.5em; }
+      p { font-size: 1em; }
+      button { 
+        font-size: 15px; 
+        padding: 10px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="questionCard">
+    <h1>Akvile 💖</h1>
+    <p>Ar eisi su manimi Valentino dieną į pasimatymą? 🌹</p>
+    <div class="buttons">
+      <button id="yes" onclick="handleYes()">Taip 💕</button>
+      <button id="no">Ne 😅</button>
+    </div>
+  </div>
+
+  <div class="success-page" id="successPage">
+    <h1>YESSS! 💘</h1>
+    <div class="gif-container">
+      <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnk3ajR3YnppOW42dWVkYmp4bDNwOXN0a2w2dmVvM2M0a2pjZmRtMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UO5elnTqo4vSg/giphy.gif" alt="Excited">
+    </div>
+    <p>Nekantrauju! 😊🌹</p>
+  </div>
+  
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const questionCard = document.getElementById("questionCard");
+    const successPage = document.getElementById("successPage");
+    let noBtnSize = 1;
+    let attempts = 0;
+    let isMoving = false;
+    let hasStartedMoving = false;
+    
+    function moveNoButton() {
+      if (isMoving) return;
+      isMoving = true;
+      
+      // Pirmą kartą padarome fixed
+      if (!hasStartedMoving) {
+        noBtn.classList.add('floating');
+        hasStartedMoving = true;
+      }
+      
+      attempts++;
+      
+      const padding = 20;
+      const buttonRect = noBtn.getBoundingClientRect();
+      const maxWidth = window.innerWidth - buttonRect.width - padding;
+      const maxHeight = window.innerHeight - buttonRect.height - padding;
+      
+      let x, y;
+      let attempts_to_place = 0;
+      const cardRect = questionCard.getBoundingClientRect();
+      
+      do {
+        x = padding + Math.random() * (maxWidth - padding);
+        y = padding + Math.random() * (maxHeight - padding);
+        attempts_to_place++;
+      } while (
+        attempts_to_place < 20 &&
+        x < cardRect.right + 20 &&
+        x + buttonRect.width > cardRect.left - 20 &&
+        y < cardRect.bottom + 20 &&
+        y + buttonRect.height > cardRect.top - 20
+      );
+      
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      
+      noBtnSize = Math.max(0.5, noBtnSize - 0.08);
+      noBtn.style.transform = `scale(${noBtnSize})`;
+      
+      if (attempts === 3) {
+        noBtn.textContent = "Tikrai ne? 🥺";
+      }
+      if (attempts === 6) {
+        noBtn.textContent = "Rimtai? 😢";
+      }
+      if (attempts === 10) {
+        noBtn.textContent = "Gal vis tik taip? 😏";
+      }
+      
+      setTimeout(() => {
+        isMoving = false;
+      }, 300);
+    }
+    
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+    
+    function handleYes() {
+      questionCard.style.display = 'none';
+      noBtn.style.display = 'none';
+      successPage.classList.add('active');
+      
+      createFloatingHearts();
+    }
+    
+    function createFloatingHearts() {
+      const hearts = ['❤️', '💕', '💖', '💗', '💘', '💝', '🌹'];
+      
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'hearts-bg';
+          heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+          heart.style.left = Math.random() * 100 + '%';
+          heart.style.animationDelay = Math.random() * 2 + 's';
+          heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+          document.body.appendChild(heart);
+        }, i * 200);
+      }
+    }
+  </script>
+</body>
+</html>
